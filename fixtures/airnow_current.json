@@ -1,0 +1,32 @@
+[
+  {
+    "DateObserved": "2020-01-03 ",
+    "HourObserved": 20,
+    "LocalTimeZone": "EST",
+    "ReportingArea": "Pittsburgh",
+    "StateCode": "PA",
+    "Latitude": 40.434,
+    "Longitude": -79.984,
+    "ParameterName": "O3",
+    "AQI": 17,
+    "Category": {
+      "Number": 1,
+      "Name": "Good"
+    }
+  },
+  {
+    "DateObserved": "2020-01-03 ",
+    "HourObserved": 20,
+    "LocalTimeZone": "EST",
+    "ReportingArea": "Pittsburgh",
+    "StateCode": "PA",
+    "Latitude": 40.434,
+    "Longitude": -79.984,
+    "ParameterName": "PM2.5",
+    "AQI": 56,
+    "Category": {
+      "Number": 2,
+      "Name": "Moderate"
+    }
+  }
+]

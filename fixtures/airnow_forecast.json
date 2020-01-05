@@ -1,0 +1,82 @@
+[
+  {
+    "DateIssue": "2020-01-03 ",
+    "DateForecast": "2020-01-03 ",
+    "ReportingArea": "Pittsburgh",
+    "StateCode": "PA",
+    "Latitude": 40.434,
+    "Longitude": -79.984,
+    "ParameterName": "PM2.5",
+    "AQI": 51,
+    "Category": {
+      "Number": 2,
+      "Name": "Moderate"
+    },
+    "ActionDay": false,
+    "Discussion": "Current conditions: The current radar shows rain across the area this Friday afternoon, and rain along with areas of fog will continue tonight as low pressure continues to influence the local weather.  ***  Saturday's forecast: Low pressure will move to the east Saturday, to a position off of the New England coast by the evening. Colder air will also move in during the afternoon, with enough mixing to keep fine particulate concentrations in the good range for the daily average. A bit of snow Saturday night may even bring a dusting as temperatures fall into the upper 20s.  ***  Sunday's forecast: Breezy and chilly Sunday as temperatures struggle to reach the 40 degree mark. A couple of snow showers are possible late in the day and at night as a weak area of low pressure passes to the north. Strong vertical and horizontal mixing will promote good air quality.  ***  Monday's forecast: Morning clouds will give way to partly sunny skies by Monday afternoon as it continues breezy with good dispersion keeping fine particulate low.  ***  Extended forecast: Low pressure will bring a mix of snow and rain Tuesday, and with the precipitation present, PM2.5 levels should remain in the good range. Brisk and cold Wednesday with a few snow showers in the wake of this system along with low levels of particles. The cold will not last, though, as temperatures warm again late in the week.---McAuliffe"
+  },
+  {
+    "DateIssue": "2020-01-03 ",
+    "DateForecast": "2020-01-04 ",
+    "ReportingArea": "Pittsburgh",
+    "StateCode": "PA",
+    "Latitude": 40.434,
+    "Longitude": -79.984,
+    "ParameterName": "PM2.5",
+    "AQI": 43,
+    "Category": {
+      "Number": 1,
+      "Name": "Good"
+    },
+    "ActionDay": false,
+    "Discussion": "Current conditions: The current radar shows rain across the area this Friday afternoon, and rain along with areas of fog will continue tonight as low pressure continues to influence the local weather.  ***  Saturday's forecast: Low pressure will move to the east Saturday, to a position off of the New England coast by the evening. Colder air will also move in during the afternoon, with enough mixing to keep fine particulate concentrations in the good range for the daily average. A bit of snow Saturday night may even bring a dusting as temperatures fall into the upper 20s.  ***  Sunday's forecast: Breezy and chilly Sunday as temperatures struggle to reach the 40 degree mark. A couple of snow showers are possible late in the day and at night as a weak area of low pressure passes to the north. Strong vertical and horizontal mixing will promote good air quality.  ***  Monday's forecast: Morning clouds will give way to partly sunny skies by Monday afternoon as it continues breezy with good dispersion keeping fine particulate low.  ***  Extended forecast: Low pressure will bring a mix of snow and rain Tuesday, and with the precipitation present, PM2.5 levels should remain in the good range. Brisk and cold Wednesday with a few snow showers in the wake of this system along with low levels of particles. The cold will not last, though, as temperatures warm again late in the week.---McAuliffe"
+  },
+  {
+    "DateIssue": "2020-01-03 ",
+    "DateForecast": "2020-01-05 ",
+    "ReportingArea": "Pittsburgh",
+    "StateCode": "PA",
+    "Latitude": 40.434,
+    "Longitude": -79.984,
+    "ParameterName": "PM2.5",
+    "AQI": 35,
+    "Category": {
+      "Number": 1,
+      "Name": "Good"
+    },
+    "ActionDay": false,
+    "Discussion": "Current conditions: The current radar shows rain across the area this Friday afternoon, and rain along with areas of fog will continue tonight as low pressure continues to influence the local weather.  ***  Saturday's forecast: Low pressure will move to the east Saturday, to a position off of the New England coast by the evening. Colder air will also move in during the afternoon, with enough mixing to keep fine particulate concentrations in the good range for the daily average. A bit of snow Saturday night may even bring a dusting as temperatures fall into the upper 20s.  ***  Sunday's forecast: Breezy and chilly Sunday as temperatures struggle to reach the 40 degree mark. A couple of snow showers are possible late in the day and at night as a weak area of low pressure passes to the north. Strong vertical and horizontal mixing will promote good air quality.  ***  Monday's forecast: Morning clouds will give way to partly sunny skies by Monday afternoon as it continues breezy with good dispersion keeping fine particulate low.  ***  Extended forecast: Low pressure will bring a mix of snow and rain Tuesday, and with the precipitation present, PM2.5 levels should remain in the good range. Brisk and cold Wednesday with a few snow showers in the wake of this system along with low levels of particles. The cold will not last, though, as temperatures warm again late in the week.---McAuliffe"
+  },
+  {
+    "DateIssue": "2020-01-03 ",
+    "DateForecast": "2020-01-06 ",
+    "ReportingArea": "Pittsburgh",
+    "StateCode": "PA",
+    "Latitude": 40.434,
+    "Longitude": -79.984,
+    "ParameterName": "PM2.5",
+    "AQI": 38,
+    "Category": {
+      "Number": 1,
+      "Name": "Good"
+    },
+    "ActionDay": false,
+    "Discussion": "Current conditions: The current radar shows rain across the area this Friday afternoon, and rain along with areas of fog will continue tonight as low pressure continues to influence the local weather.  ***  Saturday's forecast: Low pressure will move to the east Saturday, to a position off of the New England coast by the evening. Colder air will also move in during the afternoon, with enough mixing to keep fine particulate concentrations in the good range for the daily average. A bit of snow Saturday night may even bring a dusting as temperatures fall into the upper 20s.  ***  Sunday's forecast: Breezy and chilly Sunday as temperatures struggle to reach the 40 degree mark. A couple of snow showers are possible late in the day and at night as a weak area of low pressure passes to the north. Strong vertical and horizontal mixing will promote good air quality.  ***  Monday's forecast: Morning clouds will give way to partly sunny skies by Monday afternoon as it continues breezy with good dispersion keeping fine particulate low.  ***  Extended forecast: Low pressure will bring a mix of snow and rain Tuesday, and with the precipitation present, PM2.5 levels should remain in the good range. Brisk and cold Wednesday with a few snow showers in the wake of this system along with low levels of particles. The cold will not last, though, as temperatures warm again late in the week.---McAuliffe"
+  },
+  {
+    "DateIssue": "2020-01-03 ",
+    "DateForecast": "2020-01-07 ",
+    "ReportingArea": "Pittsburgh",
+    "StateCode": "PA",
+    "Latitude": 40.434,
+    "Longitude": -79.984,
+    "ParameterName": "PM2.5",
+    "AQI": 42,
+    "Category": {
+      "Number": 1,
+      "Name": "Good"
+    },
+    "ActionDay": false,
+    "Discussion": "Current conditions: The current radar shows rain across the area this Friday afternoon, and rain along with areas of fog will continue tonight as low pressure continues to influence the local weather.  ***  Saturday's forecast: Low pressure will move to the east Saturday, to a position off of the New England coast by the evening. Colder air will also move in during the afternoon, with enough mixing to keep fine particulate concentrations in the good range for the daily average. A bit of snow Saturday night may even bring a dusting as temperatures fall into the upper 20s.  ***  Sunday's forecast: Breezy and chilly Sunday as temperatures struggle to reach the 40 degree mark. A couple of snow showers are possible late in the day and at night as a weak area of low pressure passes to the north. Strong vertical and horizontal mixing will promote good air quality.  ***  Monday's forecast: Morning clouds will give way to partly sunny skies by Monday afternoon as it continues breezy with good dispersion keeping fine particulate low.  ***  Extended forecast: Low pressure will bring a mix of snow and rain Tuesday, and with the precipitation present, PM2.5 levels should remain in the good range. Brisk and cold Wednesday with a few snow showers in the wake of this system along with low levels of particles. The cold will not last, though, as temperatures warm again late in the week.---McAuliffe"
+  }
+]
