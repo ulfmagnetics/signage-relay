@@ -1,5 +1,4 @@
 import unittest
-import air_quality
 from air_quality.air_quality_packet import AirQualityPacket
 
 class TestAirQualityPacket(unittest.TestCase):
