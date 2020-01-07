@@ -11,6 +11,7 @@ import adafruit_bluefruit_connect
 from Adafruit_BluefruitLE.services import UART
 from adafruit_bluefruit_connect.color_packet import ColorPacket
 from adafruit_bluefruit_connect.button_packet import ButtonPacket
+from signage_air_quality.air_quality_packet import AirQualityPacket
 from time import sleep
 
 ble = Adafruit_BluefruitLE.get_provider()
