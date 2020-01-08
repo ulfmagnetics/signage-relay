@@ -6,13 +6,12 @@
 # Based mostly on `examples/uart_service.py` from the Adafruit_Python_BluefruitLE repository.
 #
 
-import Adafruit_BluefruitLE
-import adafruit_bluefruit_connect
-from Adafruit_BluefruitLE.services import UART
-from adafruit_bluefruit_connect.color_packet import ColorPacket
-from adafruit_bluefruit_connect.button_packet import ButtonPacket
-from signage_air_quality.air_quality_packet import AirQualityPacket
+from itertools import chain
 from time import sleep
+from random import randint, shuffle
+import Adafruit_BluefruitLE
+from Adafruit_BluefruitLE.services import UART
+from signage_air_quality.air_quality_packet import AirQualityPacket
 
 ble = Adafruit_BluefruitLE.get_provider()
 
@@ -44,24 +43,15 @@ def main():
 
         uart = UART(device)
 
-        print('Sending packets...')
-        color = (200,200,0)
-        color_packet = ColorPacket(color)
-        uart.write(color_packet.to_bytes())
-
-        i = 0
-        while i < 10:
-            button_packet = ButtonPacket(b'8', True)
-            uart.write(button_packet.to_bytes())
-
-            sleep(0.1)
-
-            button_packet = ButtonPacket(b'8', False)
-            uart.write(button_packet.to_bytes())
-
-            sleep(0.5)
-
-            i = i + 1
+        print('Sending mock packets...')
+        pm25 = list(map(lambda v: AirQualityPacket(v, 'PM2.5'), [33, 120, 240, 350, 10]))
+        o3 = list(map(lambda v: AirQualityPacket(v, 'O3'), [10, 90, 300, 240, 75]))
+        mock_packets = list(chain(pm25, o3))
+        shuffle(mock_packets)
+        for packet in mock_packets:
+            print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
+            uart.write(packet.to_bytes())
+            sleep(randint(1,5))
 
     finally:
         device.disconnect()
