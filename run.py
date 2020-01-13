@@ -47,6 +47,7 @@ def main():
     api_key = env.str('AIRNOW_API_KEY')
     zip_code = env.str('ZIP_CODE')
     poll_interval = env.int('POLL_INTERVAL', default=300)
+    debug = env.bool('DEBUG', default=False)
     print('Initializing API with MOCK_API={0}, AIRNOW_API_KEY={1}, ZIP_CODE={2}'.format(mock_api, api_key, zip_code))
     airnow_api = MockApi() if mock_api else Api(api_key=api_key, zip_code=zip_code)
 
@@ -59,7 +60,8 @@ def main():
         while True:
             try:
                 for packet in airnow_api.read_packets():
-                    print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
+                    if debug:
+                        print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
                     uart.write(packet.to_bytes())
             except:
                 print("Exception while reading packet from API", sys.exc_info()[0])
