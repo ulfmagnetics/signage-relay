@@ -10,6 +10,7 @@ import os
 import sys
 from dotenv import load_dotenv
 from envparse import env
+from time import sleep
 import Adafruit_BluefruitLE
 from Adafruit_BluefruitLE.services import UART
 
@@ -44,8 +45,10 @@ def main():
 
     mock_api = env.bool('MOCK_API', default=False)
     api_key = env.str('AIRNOW_API_KEY')
-    print('Initializing API with MOCK_API={0}, AIRNOW_API_KEY={1}'.format(mock_api, api_key))
-    airnow_api = MockApi() if mock_api else Api(api_key=api_key)
+    zip_code = env.str('ZIP_CODE')
+    poll_interval = env.int('POLL_INTERVAL', default=300)
+    print('Initializing API with MOCK_API={0}, AIRNOW_API_KEY={1}, ZIP_CODE={2}'.format(mock_api, api_key, zip_code))
+    airnow_api = MockApi() if mock_api else Api(api_key=api_key, zip_code=zip_code)
 
     try:
         print('Discovering services...')
@@ -55,11 +58,13 @@ def main():
 
         while True:
             try:
-                packet = airnow_api.next_packet()
-                print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
-                uart.write(packet.to_bytes())
+                for packet in airnow_api.read_packets():
+                    print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
+                    uart.write(packet.to_bytes())
             except:
-                print("Exception while waiting for next packet from API", sys.exc_info()[0])
+                print("Exception while reading packet from API", sys.exc_info()[0])
+
+            sleep(poll_interval)
 
     finally:
         device.disconnect()
