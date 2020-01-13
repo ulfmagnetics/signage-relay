@@ -6,7 +6,9 @@
 # Based mostly on `examples/uart_service.py` from the Adafruit_Python_BluefruitLE repository.
 #
 
+import os
 import sys
+from dotenv import load_dotenv
 from envparse import env
 import Adafruit_BluefruitLE
 from Adafruit_BluefruitLE.services import UART
@@ -14,7 +16,7 @@ from Adafruit_BluefruitLE.services import UART
 from airnow.mock_api import MockApi
 from airnow.api import Api
 
-API_READ_TIMEOUT=60
+load_dotenv()
 
 ble = Adafruit_BluefruitLE.get_provider()
 
@@ -40,7 +42,10 @@ def main():
     print('Connecting to device...')
     device.connect()
 
-    airnow_api = MockApi() if env.bool('MOCK_API', default=False) else Api(timeout=API_READ_TIMEOUT)
+    mock_api = env.bool('MOCK_API', default=False)
+    api_key = env.str('AIRNOW_API_KEY')
+    print('Initializing API with MOCK_API={0}, AIRNOW_API_KEY={1}'.format(mock_api, api_key))
+    airnow_api = MockApi() if mock_api else Api(api_key=api_key)
 
     try:
         print('Discovering services...')
