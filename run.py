@@ -6,12 +6,15 @@
 # Based mostly on `examples/uart_service.py` from the Adafruit_Python_BluefruitLE repository.
 #
 
-from itertools import chain
-from time import sleep
-from random import randint, shuffle
+import sys
+from envparse import env
 import Adafruit_BluefruitLE
 from Adafruit_BluefruitLE.services import UART
-from signage_air_quality.air_quality_packet import AirQualityPacket
+
+from airnow.mock_api import MockApi
+from airnow.api import Api
+
+API_READ_TIMEOUT=60
 
 ble = Adafruit_BluefruitLE.get_provider()
 
@@ -37,21 +40,21 @@ def main():
     print('Connecting to device...')
     device.connect()
 
+    airnow_api = MockApi() if env.bool('MOCK_API', default=False) else Api(timeout=API_READ_TIMEOUT)
+
     try:
         print('Discovering services...')
         UART.discover(device)
 
         uart = UART(device)
 
-        print('Sending mock packets...')
-        pm25 = list(map(lambda v: AirQualityPacket(v, 'PM2.5'), [33, 120, 240, 350, 10]))
-        o3 = list(map(lambda v: AirQualityPacket(v, 'O3'), [10, 90, 300, 240, 75]))
-        mock_packets = list(chain(pm25, o3))
-        shuffle(mock_packets)
-        for packet in mock_packets:
-            print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
-            uart.write(packet.to_bytes())
-            sleep(randint(1,5))
+        while True:
+            try:
+                packet = airnow_api.next_packet()
+                print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
+                uart.write(packet.to_bytes())
+            except:
+                print("Exception while waiting for next packet from API", sys.exc_info()[0])
 
     finally:
         device.disconnect()
