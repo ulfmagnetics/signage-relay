@@ -61,7 +61,7 @@ def main():
             try:
                 for packet in airnow_api.read_packets():
                     if debug:
-                        print("Sending packet: value={0}, metric={1}".format(packet.value, packet.metric))
+                        print("Sending packet: value={0}, metric={1}, timestamp={2}".format(packet.value, packet.metric, packet.timestamp))
                     uart.write(packet.to_bytes())
             except:
                 print("Exception while reading packet from API", sys.exc_info()[0])
