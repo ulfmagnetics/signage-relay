@@ -32,18 +32,13 @@ def main():
 
     packet_source = PacketSource(config)
 
+    UART.disconnect_devices()
+
     while True:
         try:
-            print('Disconnecting any connected UART devices...')
-            UART.disconnect_devices()
-
             print('Connecting to device...')
-            try:
-                adapter.start_scan()
-                device = UART.find_device()
-            finally:
-                adapter.stop_scan()
-
+            adapter.start_scan()
+            device = UART.find_device()
             if device is None:
                 raise RuntimeError('Failed to find UART device!')
 
@@ -56,8 +51,10 @@ def main():
                 debug('Sending packet: value={0}, metric={1}, timestamp={2}'.format(packet.value, packet.metric, packet.timestamp))
                 uart.write(packet.to_bytes())
         except Exception as e:
-            print('Exception of type {0} while reading packet from API: {1}'.format(sys.exc_info()[0], str(e)))
+            print('Caught exception of type {0} in main loop: {1}'.format(sys.exc_info()[0], str(e)))
         finally:
+            adapter.stop_scan()
+            UART.disconnect_devices()
             print('Going to sleep for {0} seconds...'.format(config.poll_interval))
             sleep(config.poll_interval)
 
