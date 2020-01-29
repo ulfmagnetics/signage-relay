@@ -24,8 +24,6 @@ def debug(msg):
         print(msg)
 
 def main():
-    ble.clear_cached_data()
-
     adapter = ble.get_default_adapter()
     adapter.power_on()
     print('Using adapter: {0}'.format(adapter.name))
@@ -33,6 +31,8 @@ def main():
     packet_source = PacketSource(config)
 
     UART.disconnect_devices()
+
+    device = None
 
     while True:
         try:
@@ -50,13 +50,16 @@ def main():
             for packet in packet_source.read_packets():
                 debug('Sending packet: value={0}, metric={1}, timestamp={2}'.format(packet.value, packet.metric, packet.timestamp))
                 uart.write(packet.to_bytes())
+
         except Exception as e:
             print('Caught exception of type {0} in main loop: {1}'.format(sys.exc_info()[0], str(e)))
+
         finally:
-            adapter.stop_scan()
-            UART.disconnect_devices()
             print('Going to sleep for {0} seconds...'.format(config.poll_interval))
             sleep(config.poll_interval)
+            print('Disconnecting devices before restarting main loop...')
+            device.disconnect()
+            adapter.stop_scan()
 
 ble.initialize()
 ble.run_mainloop_with(main)
