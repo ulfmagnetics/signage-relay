@@ -1,5 +1,7 @@
 from dotenv import load_dotenv
 from envparse import env
+from time import time
+
 from signage_air_quality.air_quality_packet import AirQualityPacket
 
 class Observation:
@@ -15,7 +17,7 @@ class Observation:
     def to_packet_list(self):
         if self.debug:
             print('Observation: json={0}', self.json)
-        return list(map(lambda h: AirQualityPacket(h['AQI'], h['ParameterName']), self.json))
+        return list(map(lambda h: AirQualityPacket(h['AQI'], h['ParameterName'], int(time())), self.json))
 
     @property
     def debug(self):

@@ -8,68 +8,57 @@
 
 import os
 import sys
-from dotenv import load_dotenv
-from envparse import env
 from time import sleep
 import Adafruit_BluefruitLE
 from Adafruit_BluefruitLE.services import UART
 
-from airnow.mock_api import MockApi
-from airnow.api import Api
-
-load_dotenv()
+from signage_relay.configuration import Configuration
+from signage_relay.packet_source import PacketSource
 
 ble = Adafruit_BluefruitLE.get_provider()
 
-def main():
-    ble.clear_cached_data()
+config = Configuration.generate()
 
+def debug(msg):
+    if config.debug:
+        print(msg)
+
+def main():
     adapter = ble.get_default_adapter()
     adapter.power_on()
     print('Using adapter: {0}'.format(adapter.name))
 
-    print('Disconnecting any connected UART devices...')
+    device = None
+    packet_source = PacketSource(config)
+
     UART.disconnect_devices()
 
-    print('Searching for UART device...')
-    try:
-        adapter.start_scan()
-        device = UART.find_device()
-        if device is None:
-            raise RuntimeError('Failed to find UART device!')
-    finally:
-        adapter.stop_scan()
+    while True:
+        try:
+            print('Connecting to device...')
+            adapter.start_scan()
+            device = UART.find_device()
+            if device is None:
+                raise RuntimeError('Failed to find UART device!')
 
-    print('Connecting to device...')
-    device.connect()
+            device.connect()
 
-    mock_api = env.bool('MOCK_API', default=False)
-    api_key = env.str('AIRNOW_API_KEY')
-    zip_code = env.str('ZIP_CODE')
-    poll_interval = env.int('POLL_INTERVAL', default=300)
-    debug = env.bool('DEBUG', default=False)
-    print('Initializing API with MOCK_API={0}, AIRNOW_API_KEY={1}, ZIP_CODE={2}'.format(mock_api, api_key, zip_code))
-    airnow_api = MockApi() if mock_api else Api(api_key=api_key, zip_code=zip_code)
+            UART.discover(device)
+            uart = UART(device)
 
-    try:
-        print('Discovering services...')
-        UART.discover(device)
+            for packet in packet_source.read_packets():
+                debug('Sending packet: value={0}, metric={1}, timestamp={2}'.format(packet.value, packet.metric, packet.timestamp))
+                uart.write(packet.to_bytes())
 
-        uart = UART(device)
+            print('Going to sleep for {0} seconds...'.format(config.poll_interval))
+            sleep(config.poll_interval)
 
-        while True:
-            try:
-                for packet in airnow_api.read_packets():
-                    if debug:
-                        print("Sending packet: value={0}, metric={1}, timestamp={2}".format(packet.value, packet.metric, packet.timestamp))
-                    uart.write(packet.to_bytes())
-            except:
-                print("Exception while reading packet from API", sys.exc_info()[0])
+            print('Disconnecting devices before restarting main loop...')
+            device.disconnect()
+            adapter.stop_scan()
 
-            sleep(poll_interval)
-
-    finally:
-        device.disconnect()
+        except Exception as e:
+            print('Caught exception of type {0} in main loop: {1}'.format(sys.exc_info()[0], str(e)))
 
 ble.initialize()
 ble.run_mainloop_with(main)

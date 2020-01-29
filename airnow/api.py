@@ -6,6 +6,7 @@ from .observation import Observation
 
 class Api:
     def __init__(self, api_key, zip_code, distance_miles=10, read_timeout=60):
+        print('Initializing API with api_key={0}, zip_code={1}, distance_miles={2}'.format(api_key, zip_code, distance_miles))
         self._api_key = api_key
         self._zip_code = zip_code
         self._distance_miles = distance_miles
