@@ -24,6 +24,8 @@ def debug(msg):
         print(msg)
 
 def main():
+    ble.clear_cached_data()
+
     adapter = ble.get_default_adapter()
     adapter.power_on()
     print('Using adapter: {0}'.format(adapter.name))
@@ -59,6 +61,7 @@ def main():
 
         except Exception as e:
             print('Caught exception of type {0} in main loop: {1}'.format(sys.exc_info()[0], str(e)))
+            sleep(5) # bleccchh 
 
 ble.initialize()
 ble.run_mainloop_with(main)
